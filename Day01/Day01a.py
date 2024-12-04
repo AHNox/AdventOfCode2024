@@ -1,4 +1,6 @@
 """
+Part 1:
+
 --- Day 1: Historian Hysteria ---
 The Chief Historian is always present for the big Christmas sleigh launch, but nobody has seen him in months! Last anyone heard, he was visiting locations that are historically significant to the North Pole; a group of Senior Historians has asked you to accompany them as they check the places they think he was most likely to visit.
 
@@ -38,3 +40,21 @@ To find the total distance between the left list and the right list, add up the 
 
 Your actual left and right lists contain many location IDs. What is the total distance between your lists?
 """
+
+set1 = []
+set2 = []
+
+with open('Day01Input.txt') as f:
+    for line in f:
+        set1.append(int(line.split()[0]))
+        set2.append(int(line.split()[1]))
+
+set1.sort()
+set2.sort()
+
+distance = 0
+
+for i in range(len(set1)):
+    distance += abs(set1[i]-set2[i])
+
+print(distance)
