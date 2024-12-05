@@ -31,3 +31,30 @@ So, in this example, 2 reports are safe.
 
 Analyze the unusual data from the engineers. How many reports are safe?
 """
+
+reportList = []
+
+with open('Day02Input.txt') as f:
+    for line in f:
+        reportList.append(list(map(int, line.split())))
+
+def isAllMonotonic(levels):
+    originalLevels = levels
+    regularSortedLevels = sorted(levels)
+    reverseSortedLevels = sorted(levels, reverse = True)
+
+    return (originalLevels == regularSortedLevels) or (originalLevels == reverseSortedLevels)
+
+def adjacentIsSafe(levels):
+    for levelIndex in range(len(levels)-1):
+        if abs(levels[levelIndex] - levels[levelIndex+1]) not in [1, 2, 3]:
+            return False
+    return True
+
+isSafeCounter = 0
+
+for item in reportList:
+    if adjacentIsSafe(item) and isAllMonotonic(item):
+        isSafeCounter += 1
+
+print(isSafeCounter)
